@@ -4,8 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+    <script>
 
+        function calcularSumaPrimos() {
+            let acumulador = 0;
+            //repetir 15 veces
+            for (let i = 0; i < 15; i++) {
+                let numeroPrompt;
+                let noEsNumero;
+                do {
+                    //se repite hasta que el usuario introduzca un número
+                    //asegurarse de que el dato es numerico y darle formato
+                    numeroPrompt = prompt(`Introduzca un número (${i}/15 veces)`);
+                    noEsNumero =  isNaN(numeroPrompt) || numeroPrompt.trim()=== ""; //compruebo si es un numero  y si no se ha introducido una cadena vacia o con caracteres en blanco(da problemas con isNaN)
+                    //con trim elimino los caracteres en blanco para ver si habia un número dentro o nada
+                    //si es una cadena con numeros lo transformo a tipo número
+                    if (!noEsNumero)
+                        numeroPrompt = parseInt(numeroPrompt);                      
+                    console.log(noEsNumero);
+                } while (noEsNumero);
+                
+                //un numero primo es aquel que tiene unica y exclusivamente dos divisores, el mismo y la unidad
+                let esPrimo = true ;
+
+                //si es divisible por algún numero menor que el, entonces no es primo
+                for (let j = 2; j < numeroPrompt; j++) {
+                    if (numeroPrompt%j == 0)
+                    {
+                        esPrimo=false;
+                        //console.log(numeroPrompt+" no es primo");
+                    }
+                }
+                
+                if (esPrimo && numeroPrompt>1) //el 1 no puede ser primo 
+                    //sumar solo los que sean primos
+                    acumulador+=numeroPrompt;
+                
+                //console.log(acumulador);
+            }
+            let resultadosresultados = document.getElementById("resultados");
+            resultadosresultados.append("El resultado ha sido: "+acumulador)
+        }
+    </script>
+</head>
+<!-- En el directorio números-primos deberá programar embebido el código directamente en el HTML el siguiente script:
+Crea un script que pida al usuario 15 números y muestre en pantalla únicamente la suma de los que son números primos. Tenga en cuenta que al solicitar información por el prompt se debe dar formato de número antes de programar.
+ -->
 <body>
     <h1>Suma de Números Primos</h1>
     <button onclick="calcularSumaPrimos()">Calcular Suma de Números Primos</button>
